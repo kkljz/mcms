@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsk.lrms.mapper.ReservationMapper" >
+  <resultMap id="BaseResultMap" type="com.hsk.lrms.entity.Reservation" >
+    <id column="Reserve_id" property="reserveId" jdbcType="INTEGER" />
+    <result column="Lab_id" property="labId" jdbcType="INTEGER" />
+    <result column="User_id" property="userId" jdbcType="INTEGER" />
+    <result column="Reserve_type" property="reserveType" jdbcType="INTEGER" />
+    <result column="Course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="CourseName" property="coursename" jdbcType="VARCHAR" />
+    <result column="Reserve_date" property="reserveDate" jdbcType="DATE" />
+    <result column="Time_interval" property="timeInterval" jdbcType="INTEGER" />
+    <result column="Weekday" property="weekday" jdbcType="INTEGER" />
+    <result column="Person_number" property="personNumber" jdbcType="INTEGER" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+    <result column="Create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="Modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Reserve_id, Lab_id, User_id, Reserve_type, Course_id, CourseName, Reserve_date, Time_interval, 
+    Weekday, Person_number, Description, Create_time, Modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from reservation
+    where Reserve_id = #{reserveId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from reservation
+    where Reserve_id = #{reserveId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsk.lrms.entity.Reservation" >
+    insert into reservation (Reserve_id, Lab_id, User_id, 
+      Reserve_type, Course_id, CourseName, 
+      Reserve_date, Time_interval, Weekday, 
+      Person_number, Description, Create_time, 
+      Modify_time)
+    values (#{reserveId,jdbcType=INTEGER}, #{labId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{reserveType,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{coursename,jdbcType=VARCHAR}, 
+      #{reserveDate,jdbcType=DATE}, #{timeInterval,jdbcType=INTEGER}, #{weekday,jdbcType=INTEGER}, 
+      #{personNumber,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsk.lrms.entity.Reservation" >
+    insert into reservation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reserveId != null" >
+        Reserve_id,
+      </if>
+      <if test="labId != null" >
+        Lab_id,
+      </if>
+      <if test="userId != null" >
+        User_id,
+      </if>
+      <if test="reserveType != null" >
+        Reserve_type,
+      </if>
+      <if test="courseId != null" >
+        Course_id,
+      </if>
+      <if test="coursename != null" >
+        CourseName,
+      </if>
+      <if test="reserveDate != null" >
+        Reserve_date,
+      </if>
+      <if test="timeInterval != null" >
+        Time_interval,
+      </if>
+      <if test="weekday != null" >
+        Weekday,
+      </if>
+      <if test="personNumber != null" >
+        Person_number,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+      <if test="createTime != null" >
+        Create_time,
+      </if>
+      <if test="modifyTime != null" >
+        Modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reserveId != null" >
+        #{reserveId,jdbcType=INTEGER},
+      </if>
+      <if test="labId != null" >
+        #{labId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="reserveType != null" >
+        #{reserveType,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDate != null" >
+        #{reserveDate,jdbcType=DATE},
+      </if>
+      <if test="timeInterval != null" >
+        #{timeInterval,jdbcType=INTEGER},
+      </if>
+      <if test="weekday != null" >
+        #{weekday,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsk.lrms.entity.Reservation" >
+    update reservation
+    <set >
+      <if test="labId != null" >
+        Lab_id = #{labId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        User_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="reserveType != null" >
+        Reserve_type = #{reserveType,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        Course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="coursename != null" >
+        CourseName = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="reserveDate != null" >
+        Reserve_date = #{reserveDate,jdbcType=DATE},
+      </if>
+      <if test="timeInterval != null" >
+        Time_interval = #{timeInterval,jdbcType=INTEGER},
+      </if>
+      <if test="weekday != null" >
+        Weekday = #{weekday,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        Person_number = #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        Create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        Modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where Reserve_id = #{reserveId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsk.lrms.entity.Reservation" >
+    update reservation
+    set Lab_id = #{labId,jdbcType=INTEGER},
+      User_id = #{userId,jdbcType=INTEGER},
+      Reserve_type = #{reserveType,jdbcType=INTEGER},
+      Course_id = #{courseId,jdbcType=INTEGER},
+      CourseName = #{coursename,jdbcType=VARCHAR},
+      Reserve_date = #{reserveDate,jdbcType=DATE},
+      Time_interval = #{timeInterval,jdbcType=INTEGER},
+      Weekday = #{weekday,jdbcType=INTEGER},
+      Person_number = #{personNumber,jdbcType=INTEGER},
+      Description = #{description,jdbcType=VARCHAR},
+      Create_time = #{createTime,jdbcType=TIMESTAMP},
+      Modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where Reserve_id = #{reserveId,jdbcType=INTEGER}
+  </update>
+
+  <select id="dynamicSelect" resultType="com.hsk.lrms.bean.UserClassroomReserveVo">
+    SELECT l.Building_name buildingName , l.Room_number roomNumber , r.Reserve_type reserveType , u.User_type userType , u.User_name userName , c.CourseName courseName , r.Reserve_date reserveDate,
+    r.Time_interval timeInterval , r.Person_number personNumber ,  r.Description description , r.Create_time createTime
+    FROM user u LEFT JOIN reservation r ON u.User_id = r.User_id
+    LEFT JOIN course c ON r.Course_id = c.Course_id
+    LEFT JOIN laboratory l ON r.Lab_id = l.Lab_id
+    <where>
+      <if test="userType !=null and userType !=''" >
+        and u.User_type = #{userType}
+      </if>
+      <if test="userName !=null and userName !=''" >
+        and u.User_name like CONCAT('%',#{userName},'%')
+      </if>
+      <if test="reserveType !=null and reserveType !=''">
+        and r.Reserve_type = #{reserveType}
+      </if>
+      <if test="from !=null and from != ''">
+        and r.Reserve_date &gt;= #{from}
+      </if>
+      <if test="end !=null and end !=''">
+        and r.Reserve_date &lt;= #{end}
+      </if>
+    </where>
+  </select>
+    <select id="selectLabReserveById" resultType="com.hsk.lrms.bean.LabReservationVo">
+      SELECT
+      l.lab_id labId,l.building_name buildingName,l.room_number roomNumber,r.reserve_type reserveType,
+      r.reserve_date reserveDate,r.time_interval timeInterval,l.person_number-sum(r.person_number) personNumber,l.is_free isFree, r.Description description
+      FROM laboratory l
+      LEFT JOIN reservation r ON l.Lab_id = r.Lab_id
+      WHERE r.Reserve_date &gt;= DATE_FORMAT(NOW(),'%Y-%m-%d') AND l.Lab_id = #{labId}
+      GROUP BY r.Reserve_date,r.Time_interval
+      ORDER BY r.Reserve_date ASC
+    </select>
+  <select id="getLabReserveByLabIdAndTimeIntervalAndReserveDate" resultType="int">
+    SELECT COUNT(1) FROM reservation r WHERE r.Lab_id = 1 AND r.Time_interval=1 AND r.Reserve_date = CURDATE()
+  </select>
+  <select id="selectLabReserveByUserId" resultType="com.hsk.lrms.bean.LabUserReservationVo">
+    SELECT l.Building_name buildingName , l.Room_number roomNumber, r.Reserve_id reserveId , r.Reserve_type reserveType , u.User_type userType , u.User_name userName , c.CourseName courseName , date_format(r.Reserve_date, '%Y-%m-%d') reserveDate,
+    r.Time_interval timeInterval , r.Person_number personNumber ,  r.Description description , r.Create_time createTime
+    FROM user u LEFT JOIN reservation r ON u.User_id = r.User_id
+    LEFT JOIN course c ON r.Course_id = c.Course_id
+    LEFT JOIN laboratory l ON r.Lab_id = l.Lab_id
+    WHERE U.User_id = #{userId}
+    order by r.Create_time desc
+  </select>
+</mapper>

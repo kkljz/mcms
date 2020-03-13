@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="database.properties"/>
+    <context id="context1">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 去掉注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <jdbcConnection connectionURL="${url}"
+                        driverClass="${driver}"
+                        password="${password}"
+                        userId="${user}" />
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+              NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.hsk.lrms.entity" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapping" targetProject="src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hsk.lrms.mapper" targetProject="src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <table tableName="term" domainObjectName="Term" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false">
+            <!-- 属性的驼峰的设置 -->
+            <property name="useActualColumnNames" value="false" />
+        </table>
+        <table tableName="course" domainObjectName="Course" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" enableSelectByExample="false">
+            <!-- 属性的驼峰的设置 -->
+            <property name="useActualColumnNames" value="false" />
+        </table>
+    </context>
+</generatorConfiguration>

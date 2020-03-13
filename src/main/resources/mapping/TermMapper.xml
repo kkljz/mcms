@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsk.lrms.mapper.TermMapper" >
+  <resultMap id="BaseResultMap" type="com.hsk.lrms.entity.Term" >
+    <id column="Term_id" property="termId" jdbcType="INTEGER" />
+    <result column="Term_name" property="termName" jdbcType="VARCHAR" />
+    <result column="From_date" property="fromDate" jdbcType="VARCHAR" />
+    <result column="End_date" property="endDate" jdbcType="VARCHAR" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Term_id, Term_name, From_date, End_date, Description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from term
+    where Term_id = #{termId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from term
+    where Term_id = #{termId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsk.lrms.entity.Term" >
+    insert into term (Term_id, Term_name, From_date, 
+      End_date, Description)
+    values (#{termId,jdbcType=INTEGER}, #{termName,jdbcType=VARCHAR}, #{fromDate,jdbcType=VARCHAR}, 
+      #{endDate,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsk.lrms.entity.Term" >
+    insert into term
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="termId != null" >
+        Term_id,
+      </if>
+      <if test="termName != null" >
+        Term_name,
+      </if>
+      <if test="fromDate != null" >
+        From_date,
+      </if>
+      <if test="endDate != null" >
+        End_date,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="termId != null" >
+        #{termId,jdbcType=INTEGER},
+      </if>
+      <if test="termName != null" >
+        #{termName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null" >
+        #{fromDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsk.lrms.entity.Term" >
+    update term
+    <set >
+      <if test="termName != null" >
+        Term_name = #{termName,jdbcType=VARCHAR},
+      </if>
+      <if test="fromDate != null" >
+        From_date = #{fromDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        End_date = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Term_id = #{termId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsk.lrms.entity.Term" >
+    update term
+    set Term_name = #{termName,jdbcType=VARCHAR},
+      From_date = #{fromDate,jdbcType=VARCHAR},
+      End_date = #{endDate,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR}
+    where Term_id = #{termId,jdbcType=INTEGER}
+  </update>
+    <select id="getListTerm" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from term
+    </select>
+</mapper>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsk.lrms.mapper.LaboratoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hsk.lrms.entity.Laboratory" >
+    <id column="Lab_id" property="labId" jdbcType="INTEGER" />
+    <result column="Building_name" property="buildingName" jdbcType="VARCHAR" />
+    <result column="Room_number" property="roomNumber" jdbcType="INTEGER" />
+    <result column="Person_number" property="personNumber" jdbcType="INTEGER" />
+    <result column="Is_free" property="isFree" jdbcType="INTEGER" />
+    <result column="Description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Lab_id, Building_name, Room_number, Person_number, Is_free, Description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from laboratory
+    where Lab_id = #{labId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from laboratory
+    where Lab_id = #{labId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsk.lrms.entity.Laboratory" >
+    insert into laboratory (Lab_id, Building_name, Room_number, 
+      Person_number, Is_free, Description
+      )
+    values (#{labId,jdbcType=INTEGER}, #{buildingName,jdbcType=VARCHAR}, #{roomNumber,jdbcType=INTEGER}, 
+      #{personNumber,jdbcType=INTEGER}, #{isFree,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsk.lrms.entity.Laboratory" >
+    insert into laboratory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="labId != null" >
+        Lab_id,
+      </if>
+      <if test="buildingName != null" >
+        Building_name,
+      </if>
+      <if test="roomNumber != null" >
+        Room_number,
+      </if>
+      <if test="personNumber != null" >
+        Person_number,
+      </if>
+      <if test="isFree != null" >
+        Is_free,
+      </if>
+      <if test="description != null" >
+        Description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="labId != null" >
+        #{labId,jdbcType=INTEGER},
+      </if>
+      <if test="buildingName != null" >
+        #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNumber != null" >
+        #{roomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsk.lrms.entity.Laboratory" >
+    update laboratory
+    <set >
+      <if test="buildingName != null" >
+        Building_name = #{buildingName,jdbcType=VARCHAR},
+      </if>
+      <if test="roomNumber != null" >
+        Room_number = #{roomNumber,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        Person_number = #{personNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isFree != null" >
+        Is_free = #{isFree,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Lab_id = #{labId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsk.lrms.entity.Laboratory" >
+    update laboratory
+    set Building_name = #{buildingName,jdbcType=VARCHAR},
+      Room_number = #{roomNumber,jdbcType=INTEGER},
+      Person_number = #{personNumber,jdbcType=INTEGER},
+      Is_free = #{isFree,jdbcType=INTEGER},
+      Description = #{description,jdbcType=VARCHAR}
+    where Lab_id = #{labId,jdbcType=INTEGER}
+  </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from laboratory
+    </select>
+</mapper>

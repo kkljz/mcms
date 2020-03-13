@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsk.lrms.mapper.ScheduleMapper" >
+  <resultMap id="BaseResultMap" type="com.hsk.lrms.entity.Schedule" >
+    <id column="Schedule_id" property="scheduleId" jdbcType="INTEGER" />
+    <result column="Lab_id" property="labId" jdbcType="INTEGER" />
+    <result column="Schedule_date" property="scheduleDate" jdbcType="DATE" />
+    <result column="T1" property="t1" jdbcType="INTEGER" />
+    <result column="T2" property="t2" jdbcType="INTEGER" />
+    <result column="T3" property="t3" jdbcType="INTEGER" />
+    <result column="T4" property="t4" jdbcType="INTEGER" />
+    <result column="T5" property="t5" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="LadScheduleBeanMap" type="com.hsk.lrms.bean.LabScheduleBean" >
+    <id column="Schedule_id" property="scheduleId" jdbcType="INTEGER" />
+    <result column="Lab_id" property="labId" jdbcType="INTEGER" />
+    <result column="Schedule_date" property="scheduleDate" jdbcType="DATE" />
+    <result column="T1" property="t1" jdbcType="INTEGER" />
+    <result column="T2" property="t2" jdbcType="INTEGER" />
+    <result column="T3" property="t3" jdbcType="INTEGER" />
+    <result column="T4" property="t4" jdbcType="INTEGER" />
+    <result column="T5" property="t5" jdbcType="INTEGER" />
+    <result column="Building_name" property="buildingName"/>
+    <result column="Room_number" property="roomNumber"/>
+    <result column="Person_number" property="personNumber"/>
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    Schedule_id, Lab_id, Schedule_date, T1, T2, T3, T4, T5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from schedule
+    where Schedule_id = #{scheduleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from schedule
+    where Schedule_id = #{scheduleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsk.lrms.entity.Schedule" >
+    insert into schedule (Schedule_id, Lab_id, Schedule_date, 
+      T1, T2, T3, T4, 
+      T5)
+    values (#{scheduleId,jdbcType=INTEGER}, #{labId,jdbcType=INTEGER}, #{scheduleDate,jdbcType=DATE}, 
+      #{t1,jdbcType=INTEGER}, #{t2,jdbcType=INTEGER}, #{t3,jdbcType=INTEGER}, #{t4,jdbcType=INTEGER}, 
+      #{t5,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsk.lrms.entity.Schedule" >
+    insert into schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scheduleId != null" >
+        Schedule_id,
+      </if>
+      <if test="labId != null" >
+        Lab_id,
+      </if>
+      <if test="scheduleDate != null" >
+        Schedule_date,
+      </if>
+      <if test="t1 != null" >
+        T1,
+      </if>
+      <if test="t2 != null" >
+        T2,
+      </if>
+      <if test="t3 != null" >
+        T3,
+      </if>
+      <if test="t4 != null" >
+        T4,
+      </if>
+      <if test="t5 != null" >
+        T5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scheduleId != null" >
+        #{scheduleId,jdbcType=INTEGER},
+      </if>
+      <if test="labId != null" >
+        #{labId,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleDate != null" >
+        #{scheduleDate,jdbcType=DATE},
+      </if>
+      <if test="t1 != null" >
+        #{t1,jdbcType=INTEGER},
+      </if>
+      <if test="t2 != null" >
+        #{t2,jdbcType=INTEGER},
+      </if>
+      <if test="t3 != null" >
+        #{t3,jdbcType=INTEGER},
+      </if>
+      <if test="t4 != null" >
+        #{t4,jdbcType=INTEGER},
+      </if>
+      <if test="t5 != null" >
+        #{t5,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsk.lrms.entity.Schedule" >
+    update schedule
+    <set >
+      <if test="labId != null" >
+        Lab_id = #{labId,jdbcType=INTEGER},
+      </if>
+      <if test="scheduleDate != null" >
+        Schedule_date = #{scheduleDate,jdbcType=DATE},
+      </if>
+      <if test="t1 != null" >
+        T1 = #{t1,jdbcType=INTEGER},
+      </if>
+      <if test="t2 != null" >
+        T2 = #{t2,jdbcType=INTEGER},
+      </if>
+      <if test="t3 != null" >
+        T3 = #{t3,jdbcType=INTEGER},
+      </if>
+      <if test="t4 != null" >
+        T4 = #{t4,jdbcType=INTEGER},
+      </if>
+      <if test="t5 != null" >
+        T5 = #{t5,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Schedule_id = #{scheduleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsk.lrms.entity.Schedule" >
+    update schedule
+    set Lab_id = #{labId,jdbcType=INTEGER},
+      Schedule_date = #{scheduleDate,jdbcType=DATE},
+      T1 = #{t1,jdbcType=INTEGER},
+      T2 = #{t2,jdbcType=INTEGER},
+      T3 = #{t3,jdbcType=INTEGER},
+      T4 = #{t4,jdbcType=INTEGER},
+      T5 = #{t5,jdbcType=INTEGER}
+    where Schedule_id = #{scheduleId,jdbcType=INTEGER}
+  </update>
+    <select id="selectAllScheduleBylabId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/> from schedule
+      where Lab_id = #{labId}
+    </select>
+  <select id="selectAllLabScheduleBeanByLabId" resultMap="LadScheduleBeanMap">
+    select s.*,l.Building_name,l.Room_number,l.Person_number
+    FROM `schedule` s LEFT JOIN laboratory l ON s.Lab_id = l.Lab_id
+    where s.Lab_id = #{labId}
+  </select>
+  <select id="selectLabScheduleBeanByLabIdAndScheduleDate" resultMap="LadScheduleBeanMap">
+    select s.*,l.Building_name,l.Room_number,l.Person_number
+    FROM `schedule` s LEFT JOIN laboratory l ON s.Lab_id = l.Lab_id
+    WHERE s.Lab_id = #{labId} AND s.Schedule_date = DATE_FORMAT(#{scheduleDate},'%Y-%m-%d')
+  </select>
+</mapper>

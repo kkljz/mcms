@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hsk.lrms.mapper.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.hsk.lrms.entity.Course" >
+    <id column="Course_id" property="courseId" jdbcType="INTEGER" />
+    <result column="CourseNumber" property="courseNumber" jdbcType="VARCHAR" />
+    <result column="CourseName" property="courseName" jdbcType="VARCHAR" />
+    <result column="CourseDescription" property="courseDescription" jdbcType="VARCHAR" />
+    <result column="Js_id" property="jsId" jdbcType="INTEGER" />
+    <result column="Person_number" property="personNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Course_id, CourseNumber, CourseName, CourseDescription, Js_id, Person_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from course
+    where Course_id = #{courseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from course
+    where Course_id = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hsk.lrms.entity.Course" >
+    insert into course (Course_id, CourseNumber, CourseName, 
+      CourseDescription, Js_id, Person_number
+      )
+    values (#{courseId,jdbcType=INTEGER}, #{coursenumber,jdbcType=VARCHAR}, #{coursename,jdbcType=VARCHAR}, 
+      #{coursedescription,jdbcType=VARCHAR}, #{jsId,jdbcType=INTEGER}, #{personNumber,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hsk.lrms.entity.Course" >
+    insert into course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        Course_id,
+      </if>
+      <if test="coursenumber != null" >
+        CourseNumber,
+      </if>
+      <if test="coursename != null" >
+        CourseName,
+      </if>
+      <if test="coursedescription != null" >
+        CourseDescription,
+      </if>
+      <if test="jsId != null" >
+        Js_id,
+      </if>
+      <if test="personNumber != null" >
+        Person_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="coursenumber != null" >
+        #{coursenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="coursedescription != null" >
+        #{coursedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="jsId != null" >
+        #{jsId,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        #{personNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hsk.lrms.entity.Course" >
+    update course
+    <set >
+      <if test="coursenumber != null" >
+        CourseNumber = #{coursenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="coursename != null" >
+        CourseName = #{coursename,jdbcType=VARCHAR},
+      </if>
+      <if test="coursedescription != null" >
+        CourseDescription = #{coursedescription,jdbcType=VARCHAR},
+      </if>
+      <if test="jsId != null" >
+        Js_id = #{jsId,jdbcType=INTEGER},
+      </if>
+      <if test="personNumber != null" >
+        Person_number = #{personNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hsk.lrms.entity.Course" >
+    update course
+    set CourseNumber = #{coursenumber,jdbcType=VARCHAR},
+      CourseName = #{coursename,jdbcType=VARCHAR},
+      CourseDescription = #{coursedescription,jdbcType=VARCHAR},
+      Js_id = #{jsId,jdbcType=INTEGER},
+      Person_number = #{personNumber,jdbcType=INTEGER}
+    where Course_id = #{courseId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+      select <include refid="Base_Column_List"/>
+      from Course
+      where Js_id = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,25 @@
+server:
+  port: 9999
+
+spring:
+  mvc:
+    view:
+      suffix: .jsp
+      prefix: /
+    static-path-pattern: /static/**
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/LRMS
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+
+# mybatis 配置
+mybatis:
+  mapper-locations: classpath*:mapping/*.xml #把xml文件放在com.XX.mapper.*中可能会出现找不到的问题，这里把他放在resource下的mapper中
+  typeAliasesPackage: com.hsk.lrms.entity #这里是实体类的位置，#实体扫描，多个package用逗号或者分号分隔
+
+#显示sql
+logging:
+  level:
+    com.hsk.lrms.mapper: debug
